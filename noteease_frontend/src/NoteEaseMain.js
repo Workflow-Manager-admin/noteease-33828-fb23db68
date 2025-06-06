@@ -507,7 +507,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
               />
               {/* Categories/tags editing */}
               <div style={{ marginTop: 8 }}>
-                <span style={{ fontSize: 13, color: '#666', fontWeight: 500 }}>Categories/Tags:</span>
+                <span style={{ fontSize: 13, color: theme === "dark" ? "#c5d7fa" : "#666", fontWeight: 500 }}>Categories/Tags:</span>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '4px 0 8px 0' }}>
                   <input
                     type="text"
@@ -527,7 +527,9 @@ function NoteEaseMain({ theme, toggleTheme }) {
                       fontSize: 13,
                       borderRadius: 7,
                       border: `1.2px solid ${COLORS.border}`,
-                      width: 100
+                      width: 100,
+                      background: theme === "dark" ? "#202638" : "#fff",
+                      color: COLORS.text
                     }}
                   />
                   <button
@@ -555,14 +557,18 @@ function NoteEaseMain({ theme, toggleTheme }) {
                 <button
                   onClick={() => { setModalOpen(false); setSelectedNote(null); }}
                   style={{
-                    background: '#eee', color: '#555', border: 'none',
+                    background: theme === "dark" ? "#23304c" : "#eee",
+                    color: theme === "dark" ? "#e6eafd" : "#555",
+                    border: 'none',
                     borderRadius: 5, padding: '9px 16px', fontSize: 15, fontWeight: 500
                   }}
                 >Cancel</button>
                 <button
                   onClick={handleSaveNote}
                   style={{
-                    background: COLORS.primary, color: '#fff', border: 'none',
+                    background: COLORS.primary,
+                    color: '#fff',
+                    border: 'none',
                     borderRadius: 5, padding: '9px 20px', fontSize: 15, fontWeight: 500
                   }}
                 >
@@ -579,7 +585,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
         width: '100%',
         textAlign: 'center',
         fontSize: 13,
-        color: '#aaa',
+        color: theme === "dark" ? "#5e6b80" : "#aaa",
         background: 'transparent',
         marginTop: 54,
         marginBottom: 8,
