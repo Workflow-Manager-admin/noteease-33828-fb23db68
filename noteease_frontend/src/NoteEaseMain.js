@@ -461,7 +461,12 @@ function NoteEaseMain({ theme, toggleTheme }) {
               boxShadow: theme === "dark" ? '0 6px 32px #111933cc' : '0 6px 32px #22335623'
             }}
           >
-            <h2 style={{ margin: 0, fontSize: 22, color: COLORS.primary, fontWeight: 700 }}>
+            <h2 style={{
+              margin: 0,
+              fontSize: 22,
+              color: COLORS.primary,
+              fontWeight: 700
+            }}>
               {selectedNote ? 'Edit Note' : 'New Note'}
             </h2>
             <div style={{ margin: '18px 0 0 0', display: 'flex', flexDirection: 'column', gap: 9 }}>
@@ -478,7 +483,9 @@ function NoteEaseMain({ theme, toggleTheme }) {
                   fontSize: 17,
                   borderRadius: 7,
                   border: `1.5px solid ${COLORS.border}`,
-                  marginBottom: 5
+                  marginBottom: 5,
+                  background: theme === "dark" ? "#202638" : "#fff",
+                  color: COLORS.text
                 }}
               />
               <textarea
@@ -493,7 +500,9 @@ function NoteEaseMain({ theme, toggleTheme }) {
                   fontSize: 15,
                   borderRadius: 7,
                   border: `1.5px solid ${COLORS.border}`,
-                  minHeight: 85
+                  minHeight: 85,
+                  background: theme === "dark" ? "#202638" : "#fff",
+                  color: COLORS.text
                 }}
               />
               {/* Categories/tags editing */}
