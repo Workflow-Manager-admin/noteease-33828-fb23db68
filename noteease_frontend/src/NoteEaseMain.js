@@ -1,19 +1,25 @@
 import React, { useState, useRef } from 'react';
 
-// Helper: color palette for tags, works in both themes
+/**
+ * Helper: Dynamic CSS variable getter for theme colors.
+ */
+function getCssVar(varName, fallback) {
+  if (typeof window !== "undefined" && window.getComputedStyle) {
+    return getComputedStyle(document.body).getPropertyValue(varName) || fallback;
+  }
+  return fallback;
+}
+
+// Tag color palette, works for both themes
 const TAG_PALETTE = [
   '#4A90E2', '#F5A623', '#50E3C2', '#B8E986', '#F8E71C', '#D7263D', '#522E92'
 ];
 
 // Helper to get a color for a tag based on name
 function getTagColor(tag) {
-  // Simple hash for unique color per tag from accent palette
-  const palette = [
-    '#4A90E2', '#F5A623', '#50E3C2', '#B8E986', '#F8E71C', '#D7263D', '#522E92'
-  ];
   let hash = 0;
   for (let i = 0; i < tag.length; i++) { hash = tag.charCodeAt(i) + ((hash << 5) - hash); }
-  return palette[Math.abs(hash) % palette.length];
+  return TAG_PALETTE[Math.abs(hash) % TAG_PALETTE.length];
 }
 
 /**
@@ -114,7 +120,8 @@ function NoteEaseMain({ theme, toggleTheme }) {
   // PUBLIC_INTERFACE
   function handleAddTag() {
     const tag = categoryInput.trim();
-    if (tag &&
+    if (
+      tag &&
       !editNoteDraft.tags.includes(tag)
     ) {
       setEditNoteDraft({
@@ -209,13 +216,15 @@ function NoteEaseMain({ theme, toggleTheme }) {
 
   // --- Main Render
   return (
-    <div style={{
-      background: getCssVar('--base-dark', '#fff'),
-      color: getCssVar('--text-color', '#181A1B'),
-      minHeight: '100vh',
-      position: 'relative',
-      transition: 'background 0.2s'
-    }}>
+    <div
+      style={{
+        background: getCssVar('--base-dark', '#fff'),
+        color: getCssVar('--text-color', '#181A1B'),
+        minHeight: '100vh',
+        position: 'relative',
+        transition: 'background 0.2s'
+      }}
+    >
       {/* Header Bar */}
       <nav style={{
         width: '100%',
@@ -263,7 +272,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
                 fontSize: 16,
                 color: COLORS.secondary,
                 transition: "background 0.18s",
-                outline: "none",
+                outline: "none"
               }}
               onClick={toggleTheme}
             >
@@ -360,7 +369,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                  <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 1, color: COLORS.primary, flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                  <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 1, color: COLORS.primary, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {note.title}
                   </div>
                   {/* Delete button */}
