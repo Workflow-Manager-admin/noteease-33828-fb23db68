@@ -1,15 +1,9 @@
 import React, { useState, useRef } from 'react';
 
-// App color and theme constants
-const COLORS = {
-  primary: '#4A90E2',
-  secondary: '#FFFFFF',
-  accent: '#F5A623',
-  tagBg: '#F5F7FA',
-  tagColor: '#4A90E2',
-  text: '#181A1B',
-  border: '#E0E0E0'
-};
+// Helper: color palette for tags, works in both themes
+const TAG_PALETTE = [
+  '#4A90E2', '#F5A623', '#50E3C2', '#B8E986', '#F8E71C', '#D7263D', '#522E92'
+];
 
 // Helper to get a color for a tag based on name
 function getTagColor(tag) {
