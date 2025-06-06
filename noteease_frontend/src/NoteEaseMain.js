@@ -16,22 +16,32 @@ function getTagColor(tag) {
   return palette[Math.abs(hash) % palette.length];
 }
 
-// PUBLIC_INTERFACE
-function NoteEaseMain() {
-  /**
-   * Main container for the NoteEase app – displays notes, manages
-   * create/edit/delete/categorize/search functionality, and provides UI
-   * for these core features in a light, intuitive layout.
-   */
-
+/**
+ * PUBLIC_INTERFACE
+ * Main container for the NoteEase app – handles notes and theme.
+ */
+function NoteEaseMain({ theme, toggleTheme }) {
   // Notes state: {id, title, content, tags: [], lastEdited}
   const [notes, setNotes] = useState([]);
-  const [selectedNote, setSelectedNote] = useState(null); // Editing/viewing
+  const [selectedNote, setSelectedNote] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [categoryInput, setCategoryInput] = useState('');
   const [editNoteDraft, setEditNoteDraft] = useState({ title: '', content: '', tags: [] });
   const searchRef = useRef();
+
+  // All theme colors use CSS variables for consistency
+  const COLORS = {
+    primary: getCssVar('--base-light', '#4A90E2').trim() || '#4A90E2',
+    secondary: getCssVar('--base-dark', '#fff').trim() || '#fff',
+    accent: getCssVar('--accent', '#F5A623').trim() || '#F5A623',
+    text: getCssVar('--text-color', '#181A1B').trim() || '#181A1B',
+    textSecondary: getCssVar('--text-secondary', '#bbb').trim() || '#bbb',
+    border: getCssVar('--border-color', '#E0E0E0').trim() || '#E0E0E0',
+    modalBg: getCssVar('--modal-bg', '#fff').trim() || '#fff',
+    noteBg: getCssVar('--note-bg', '#fff').trim() || '#fff',
+    noteShadow: getCssVar('--note-shadow', '#ececec54').trim() || '#ececec54'
+  };
 
   // PUBLIC_INTERFACE
   function handleOpenNewNote() {
