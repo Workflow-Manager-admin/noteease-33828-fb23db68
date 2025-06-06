@@ -210,10 +210,11 @@ function NoteEaseMain({ theme, toggleTheme }) {
   // --- Main Render
   return (
     <div style={{
-      background: COLORS.secondary,
-      color: COLORS.text,
+      background: getCssVar('--base-dark', '#fff'),
+      color: getCssVar('--text-color', '#181A1B'),
       minHeight: '100vh',
-      position: 'relative'
+      position: 'relative',
+      transition: 'background 0.2s'
     }}>
       {/* Header Bar */}
       <nav style={{
@@ -221,7 +222,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
         background: COLORS.primary,
         color: COLORS.secondary,
         padding: '18px 0 16px 0',
-        boxShadow: '0 1px 4px #eaeaea',
+        boxShadow: theme === "dark" ? '0 1px 4px #20243e' : '0 1px 4px #eaeaea',
         fontWeight: 600,
         fontSize: 22,
         letterSpacing: 1,
@@ -237,14 +238,44 @@ function NoteEaseMain({ theme, toggleTheme }) {
           justifyContent: 'space-between',
           padding: '0 24px'
         }}>
-          <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span role="img" aria-label="notes" style={{ marginRight: 8 }}>🗒️</span>
             <span>NoteEase</span>
           </div>
           <span style={{
-            fontSize: 14, fontWeight: 400, color: COLORS.secondary, opacity: 0.85
+            fontSize: 14, fontWeight: 400, color: COLORS.secondary, opacity: 0.85,
+            display: 'flex', alignItems: 'center', gap: 18
           }}>
-            Simple Notes App
+            <span>Simple Notes App</span>
+            {/* ---- Theme Toggle Switch ---- */}
+            <button
+              aria-label="Toggle dark/light mode"
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              style={{
+                marginLeft: 24,
+                background: 'rgba(255,255,255,0.14)',
+                border: "none",
+                borderRadius: "1.2em",
+                cursor: "pointer",
+                display: 'flex',
+                alignItems: 'center',
+                padding: '5px 10px',
+                fontSize: 16,
+                color: COLORS.secondary,
+                transition: "background 0.18s",
+                outline: "none",
+              }}
+              onClick={toggleTheme}
+            >
+              <span style={{
+                margin: "0 3px 0 2px",
+                fontWeight: 700,
+                filter: theme === "dark" ? "brightness(1.2)" : "none"
+              }}>
+                {theme === "dark" ? "🌙" : "☀️"}
+              </span>
+              <span style={{ fontSize: 13 }}>{theme === "dark" ? "Dark" : "Light"}</span>
+            </button>
           </span>
         </div>
       </nav>
@@ -268,7 +299,8 @@ function NoteEaseMain({ theme, toggleTheme }) {
             border: `1.5px solid ${COLORS.border}`,
             borderRadius: 8,
             fontSize: 16,
-            background: '#F8FAFD',
+            background: theme === "dark" ? "#222a33" : "#F8FAFD",
+            color: COLORS.text,
             marginRight: 8,
             outline: 'none',
             boxShadow: 'none'
