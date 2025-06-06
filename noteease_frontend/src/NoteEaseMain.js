@@ -320,7 +320,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
         {filteredNotes.length === 0 ? (
           <div style={{
             textAlign: 'center',
-            color: '#bbb',
+            color: getCssVar('--text-secondary', '#bbb'),
             marginTop: '48px',
             fontSize: 19
           }}>
@@ -341,12 +341,12 @@ function NoteEaseMain({ theme, toggleTheme }) {
                 tabIndex={0}
                 aria-label={`View/Edit note ${note.title}`}
                 style={{
-                  background: '#fff',
+                  background: COLORS.noteBg,
                   border: `1.5px solid ${COLORS.border}`,
                   borderRadius: 14,
-                  boxShadow: '0 1px 4px #ececec54',
+                  boxShadow: `0 1px 4px ${COLORS.noteShadow}`,
                   padding: '16px 16px 12px 16px',
-                  transition: 'box-shadow 0.2s',
+                  transition: 'box-shadow 0.2s, background 0.2s',
                   cursor: 'pointer',
                   minHeight: 64,
                   display: 'flex',
@@ -368,7 +368,10 @@ function NoteEaseMain({ theme, toggleTheme }) {
                     aria-label="Delete note"
                     title="Delete note"
                     style={{
-                      background: 'none', border: 'none', color: '#aaa', cursor: 'pointer',
+                      background: 'none',
+                      border: 'none',
+                      color: theme === "dark" ? "#8793ad" : "#aaa",
+                      cursor: 'pointer',
                       fontSize: 16, marginLeft: 8, padding: 0, position: 'relative', top: '-2px'
                     }}
                     onClick={e => {
@@ -378,7 +381,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
                   >🗑️</button>
                 </div>
                 <div style={{
-                  color: '#555',
+                  color: theme === "dark" ? "#e2e6f5" : "#555",
                   fontSize: 14,
                   marginBottom: 7,
                   minHeight: '22px',
@@ -391,7 +394,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
                   <TagsBar tags={note.tags} />
                 )}
                 <div style={{
-                  color: '#b6b6b6',
+                  color: theme === "dark" ? "#bac2ce" : "#b6b6b6",
                   fontStyle: 'italic',
                   fontSize: 11,
                   marginTop: '5px'
@@ -420,13 +423,14 @@ function NoteEaseMain({ theme, toggleTheme }) {
           right: 38,
           bottom: 38,
           fontSize: 32,
-          boxShadow: '0 4px 18px #2233561c',
+          boxShadow: theme === "dark" ? '0 4px 18px #11193399' : '0 4px 18px #2233561c',
           cursor: 'pointer',
           zIndex: 5,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          transition: "background 0.2s"
         }}
       >+</button>
 
@@ -438,7 +442,7 @@ function NoteEaseMain({ theme, toggleTheme }) {
           style={{
             position: 'fixed',
             top: 0, left: 0, width: '100vw', height: '100vh',
-            background: '#00000032',
+            background: theme === "dark" ? '#121820c6' : '#00000032',
             zIndex: 1000,
             display: 'flex', justifyContent: 'center', alignItems: 'center'
           }}
@@ -447,14 +451,14 @@ function NoteEaseMain({ theme, toggleTheme }) {
           <div
             onClick={e => e.stopPropagation()}
             style={{
-              background: '#fff',
+              background: COLORS.modalBg,
               color: COLORS.text,
               borderRadius: 18,
               padding: '32px 26px 20px 26px',
               minWidth: 340,
               width: '95vw',
               maxWidth: 430,
-              boxShadow: '0 6px 32px #22335623'
+              boxShadow: theme === "dark" ? '0 6px 32px #111933cc' : '0 6px 32px #22335623'
             }}
           >
             <h2 style={{ margin: 0, fontSize: 22, color: COLORS.primary, fontWeight: 700 }}>
